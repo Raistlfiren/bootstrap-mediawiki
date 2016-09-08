@@ -144,7 +144,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 						?>
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-							<?php echo Linker::linkKnown( SpecialPage::getTitleFor( 'Userlogin' ), wfMsg( 'login' ) ); ?>
+							<?php echo Linker::linkKnown( SpecialPage::getTitleFor( 'Userlogin' ), 'Login' ); ?>
 							</li>
 						</ul>
 						<?php
@@ -210,7 +210,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 
 				<div class="pagetitle page-header">
 					<h1><?php $this->html( 'title' ) ?> <small><?php $this->html('subtitle') ?></small></h1>
-				</div>	
+				</div>
 
 				<div class="body">
 				<?php $this->html( 'bodytext' ) ?>
@@ -243,8 +243,8 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 			<div class="container">
 				<?php $this->includePage('Bootstrap:Footer'); ?>
 				<footer>
-					<p>&copy; <?php echo date('Y'); ?> by <a href="<?php echo (isset($wgCopyrightLink) ? $wgCopyrightLink : 'http://borkweb.com'); ?>"><?php echo (isset($wgCopyright) ? $wgCopyright : 'BorkWeb'); ?></a> 
-						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a> 
+					<p>&copy; <?php echo date('Y'); ?> by <a href="<?php echo (isset($wgCopyrightLink) ? $wgCopyrightLink : 'http://borkweb.com'); ?>"><?php echo (isset($wgCopyright) ? $wgCopyright : 'BorkWeb'); ?></a>
+						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a>
 					</p>
 				</footer>
 			</div><!-- container -->
@@ -407,7 +407,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 			}//end else
 		}
 
-		return $nav;	
+		return $nav;
 	}//end get_page_links
 
 	private function get_array_links( $array, $title, $which ) {
@@ -466,7 +466,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 			$wgParserOptions = new ParserOptions($wgUser);
 			// get the text as static wiki text, but with already expanded templates,
 			// which also e.g. to use {{#dpl}} (DPL third party extension) for dynamic menus.
-			$parserOutput = $wgParser->preprocess($article->getRawText(), $pageTitle, $wgParserOptions );
+			$parserOutput = $wgParser->preprocess($article->getText(), $pageTitle, $wgParserOptions );
 			return $parserOutput;
 		}
 	}
@@ -479,7 +479,7 @@ class BootstrapMediaWikiTemplate extends QuickTemplate {
 		} else {
 			$article = new Article($pageTitle);
 			$wgParserOptions = new ParserOptions($wgUser);
-			$parserOutput = $wgParser->parse($article->getRawText(), $pageTitle, $wgParserOptions);
+			$parserOutput = $wgParser->parse($article->getText(), $pageTitle, $wgParserOptions);
 			echo $parserOutput->getText();
 		}
 	}
